@@ -5,6 +5,7 @@ import com.fb.corebanking.service.IAccountService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class AccountController {
     this.service = service;
   }
 
-  @GetMapping(path = "/{accountNo}")
+  @GetMapping(path = "/{accountNo}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Account> getAccount(@PathVariable("accountNo") String accountNo) {
     log.debug("Getting the account for no: " + accountNo);
@@ -34,7 +35,7 @@ public class AccountController {
     }
   }
 
-  @GetMapping(path = "/user/{userid}")
+  @GetMapping(path = "/user/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<List<Account>> getAccountsByUser(@PathVariable("userid") String userid) {
     log.debug("Getting the account list for user: " + userid);
@@ -46,7 +47,7 @@ public class AccountController {
     }
   }
 
-  @GetMapping(path = "/")
+  @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Iterable<Account>> getAllAccounts() {
     log.debug("Getting all the Accounts");
@@ -58,7 +59,7 @@ public class AccountController {
     }
   }
 
-  @PostMapping(path = "/")
+  @PostMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Account> addNewAccount(@RequestBody Account account) {
     log.debug("Adding new Account: " + account.getAccountName());
@@ -70,7 +71,7 @@ public class AccountController {
     }
   }
 
-  @PutMapping(path = "/")
+  @PutMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Account> updateAccount(@RequestBody Account account) {
     try {
@@ -82,7 +83,7 @@ public class AccountController {
     }
   }
 
-  @DeleteMapping(path = "/{AccountId}")
+  @DeleteMapping(path = "/{AccountId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity deleteAccount(@PathVariable("AccountId") int accountId) {
     log.debug("Deleting the Account for id: " + accountId);

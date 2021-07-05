@@ -5,6 +5,7 @@ import com.fb.corebanking.service.ITransactionService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,7 @@ public class AdminController {
   }
 
 
-  @GetMapping(path = "/transaction")
+  @GetMapping(path = "/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Iterable<Transaction>> getAllTransactions() {
     log.debug("Getting all the transaction");
@@ -41,7 +42,7 @@ public class AdminController {
     }
   }
 
-  @GetMapping(path = "/transaction/{transactionId}")
+  @GetMapping(path = "/transaction/{transactionId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Iterable<Transaction>> getTransactionById(@PathVariable("transactionId") Integer transactionId) {
     log.debug("Getting the transaction: " + transactionId);
@@ -53,7 +54,7 @@ public class AdminController {
     }
   }
 
-  @GetMapping(path = "/transaction/user/{userid}")
+  @GetMapping(path = "/transaction/user/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<List<Transaction>> getTransactionsByUser(@PathVariable("userid") String userid) {
     log.debug("Getting the transaction list for user: " + userid);
@@ -65,7 +66,7 @@ public class AdminController {
     }
   }
 
-  @PutMapping(path = "/transaction/approve/{transactionId}")
+  @PutMapping(path = "/transaction/approve/{transactionId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Transaction> updateTransaction(@PathVariable("transactionId") int transactionId) {
     try {
@@ -77,7 +78,7 @@ public class AdminController {
     }
   }
 
-  @DeleteMapping(path = "/transaction/{transactionId}")
+  @DeleteMapping(path = "/transaction/{transactionId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity deleteTransaction(@PathVariable("transactionId") int transactionId) {
     log.debug("Deleting the transaction for id: " + transactionId);

@@ -7,6 +7,7 @@ import com.fb.corebanking.service.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,7 @@ public class UserController {
     this.service = service;
   }
 
-  @GetMapping(path = "/{userId}")
+  @GetMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Account> getUser(@PathVariable("userId") String userId) {
     log.debug("Getting the user for id: " + userId);
@@ -42,7 +43,7 @@ public class UserController {
     }
   }
 
-  @GetMapping(path = "/")
+  @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Iterable<User>> getAllUsers() {
     log.debug("Getting all the users");
@@ -54,7 +55,7 @@ public class UserController {
     }
   }
 
-  @PostMapping(path = "/")
+  @PostMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<User> addNewUser(@RequestBody User user) {
     log.debug("Adding new user: " + user.getUsername());
@@ -66,7 +67,7 @@ public class UserController {
     }
   }
 
-  @PutMapping(path = "/")
+  @PutMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<User> updateUser(@RequestBody User user) {
     try {
@@ -78,7 +79,7 @@ public class UserController {
     }
   }
 
-  @DeleteMapping(path = "/{userId}")
+  @DeleteMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity deleteUser(@PathVariable("userId") int userId) {
     log.debug("Deleting the Account for id: " + userId);

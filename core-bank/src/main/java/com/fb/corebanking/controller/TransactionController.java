@@ -7,6 +7,7 @@ import com.fb.corebanking.service.ITransactionService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class TransactionController {
     this.service = service;
   }
 
-  @GetMapping(path = "/{transactionId}")
+  @GetMapping(path = "/{transactionId}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Account> getTransaction(@PathVariable("transactionId") Integer transactionId) {
     log.debug("Getting the transaction for id: " + transactionId);
@@ -45,7 +46,7 @@ public class TransactionController {
   }
 
 
-  @GetMapping(path = "/user/{userid}")
+  @GetMapping(path = "/user/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<List<Transaction>> getAccountsByUser(@PathVariable("userid") String userid) {
     log.debug("Getting the transaction list for user: " + userid);
@@ -57,7 +58,7 @@ public class TransactionController {
     }
   }
 
-  @PostMapping(path = "/")
+  @PostMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody
   ResponseEntity<Transaction> addNewTransaction(@RequestBody Transaction transaction) {
     log.debug("Adding new transaction: " + transaction.getTxId());
